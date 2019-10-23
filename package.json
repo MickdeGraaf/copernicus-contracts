@@ -4,6 +4,9 @@
   "main": "index.js",
   "author": "Mick de Graaf <mick@mickdegraaf.nl>",
   "license": "MIT",
+  "scripts": {
+    "remix": "remixd --remix-ide https://remix.ethereum.org -s ."
+  },
   "dependencies": {
     "openzeppelin-solidity": "^2.3.0"
   }
