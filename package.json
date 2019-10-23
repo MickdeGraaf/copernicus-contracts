@@ -1,0 +1,10 @@
+{
+  "name": "copernicus",
+  "version": "0.1.0",
+  "main": "index.js",
+  "author": "Mick de Graaf <mick@mickdegraaf.nl>",
+  "license": "MIT",
+  "dependencies": {
+    "openzeppelin-solidity": "^2.3.0"
+  }
+}
