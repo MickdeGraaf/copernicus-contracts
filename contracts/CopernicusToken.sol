@@ -4,7 +4,7 @@ import "openzeppelin-solidity/contracts/ownership/Ownable.sol";
 import "openzeppelin-solidity/contracts/utils/Address.sol";
 import "./Strings.sol";
 
-contract CopernicusToken is ERC721Full, Ownable {
+contract CopernicusToken is Ownable, ERC721Full {
 
   using Address for address;
   using Strings for string;
@@ -18,16 +18,21 @@ contract CopernicusToken is ERC721Full, Ownable {
     string memory _symbol,
     uint256 _maxSupply,
     uint256 _tokenPrice,
-    string memory _baseTokenUri
+    string memory _baseTokenUri,
+    address _tokenReciever
   ) ERC721Full(_name, _symbol) public {
     maxSupply = _maxSupply;
     baseTokenUri = _baseTokenUri;
     tokenPrice = _tokenPrice;
+
+    for(uint256 i = 0; i < 9; i++) {
+      _mint(_tokenReciever, totalSupply());
+    }
   }
 
   function buyToken() external payable {
     require(totalSupply() < maxSupply, "MAX_SUPPLY_REACHED");
-    require(msg.value <= tokenPrice, "MSG_VALUE_TOO_LOW");
+    require(msg.value >= tokenPrice, "MSG_VALUE_TOO_LOW");
     _mint(msg.sender, totalSupply());
   }
 
