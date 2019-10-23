@@ -26,14 +26,14 @@ contract CopernicusToken is Ownable, ERC721Full {
     tokenPrice = _tokenPrice;
 
     for(uint256 i = 0; i < 9; i++) {
-      _mint(_tokenReciever, totalSupply());
+      _mint(_tokenReciever, totalSupply() + 1);
     }
   }
 
   function buyToken() external payable {
     require(totalSupply() < maxSupply, "MAX_SUPPLY_REACHED");
     require(msg.value >= tokenPrice, "MSG_VALUE_TOO_LOW");
-    _mint(msg.sender, totalSupply());
+    _mint(msg.sender, totalSupply() + 1);
   }
 
   function withdraw() external {
