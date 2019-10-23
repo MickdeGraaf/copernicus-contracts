@@ -41,8 +41,9 @@ contract CopernicusToken is Ownable, ERC721Full {
   }
 
   function tokenURI(uint256 tokenId) external view returns (string memory) {
-        return baseTokenUri.strConcat(
-            Strings.uint2str(tokenId)
-        );
+        // return baseTokenUri.strConcat(
+        //     Strings.uint2str(tokenId)
+        // );
+        return baseTokenUri;
     }
 }
