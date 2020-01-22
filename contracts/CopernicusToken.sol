@@ -12,6 +12,7 @@ contract CopernicusToken is Ownable, ERC721Full {
   uint256 public maxSupply;
   uint256 public tokenPrice;
   string public baseTokenUri;
+  address public minter;
 
   constructor(
     string memory _name,
@@ -30,6 +31,17 @@ contract CopernicusToken is Ownable, ERC721Full {
     }
   }
 
+  function setMinter(address _minter) external {
+    // TODO limit setting minter
+    require(minter == address(0), "MINTER_ALREADY_SET");
+    minter = _minter;
+  }
+
+  function mint(address _to) external {
+    require(msg.sender == minter, "NOT_MINTER");
+    _mint(_to, totalSupply() + 1);
+  }
+
   function buyToken() external payable {
     require(totalSupply() < maxSupply, "MAX_SUPPLY_REACHED");
     require(msg.value >= tokenPrice, "MSG_VALUE_TOO_LOW");
@@ -41,9 +53,9 @@ contract CopernicusToken is Ownable, ERC721Full {
   }
 
   function tokenURI(uint256 tokenId) external view returns (string memory) {
-        // return baseTokenUri.strConcat(
-        //     Strings.uint2str(tokenId)
-        // );
-        return baseTokenUri;
+        return baseTokenUri.strConcat(
+            Strings.uint2str(tokenId)
+        ).strConcat(".json");
+        // return baseTokenUri;
     }
 }

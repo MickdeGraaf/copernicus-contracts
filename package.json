@@ -8,6 +8,7 @@
     "remix": "remixd --remix-ide https://remix.ethereum.org -s ."
   },
   "dependencies": {
-    "openzeppelin-solidity": "^2.3.0"
+    "openzeppelin-solidity": "^2.3.0",
+    "truffle-hdwallet-provider": "^1.0.17"
   }
 }
