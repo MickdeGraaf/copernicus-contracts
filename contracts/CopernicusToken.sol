@@ -18,14 +18,20 @@ contract CopernicusToken is Ownable, ERC721Full {
     string memory _symbol,
     uint256 _maxSupply,
     uint256 _tokenPrice,
-    string memory _baseTokenUri
+    string memory _baseTokenUri,
+    address _tokenReceiver
   ) ERC721Full(_name, _symbol) public {
     maxSupply = _maxSupply;
     baseTokenUri = _baseTokenUri;
     tokenPrice = _tokenPrice;
 
     for(uint256 i = 0; i < 21; i++) {
-      _mint(msg.sender, totalSupply() + 1);
+      if(i < 9) {
+        _mint(_tokenReceiver, totalSupply() + 1);
+      } else {
+        _mint(msg.sender, totalSupply() + 1);
+      }
+      
     }
   }
 
